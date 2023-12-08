@@ -69,6 +69,7 @@ public class RDSConnection {
      */
     public static Connection getDBConnectionUsingIam() throws Exception {
         setSslProperties();
+        Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(JDBC_URL, setMySqlConnectionProperties());
     }
 

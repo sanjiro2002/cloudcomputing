@@ -38,9 +38,9 @@ public class ServletGetThumbnailByKey extends HttpServlet {
  String bucketName = "cloudduy";
 
 
- AwsBasicCredentials awsBasicCredentials = AwsBasicCredentials.create("",
+ AwsBasicCredentials awsBasicCredentials = AwsBasicCredentials.create("AKIA5XT4PCT4SEN2ZZOK",
 
-"");
+"tXx1Qa10WeQyfJKK9iKxx67/QBYze7zGTha9/1G1");
 
 
  AwsCredentialsProvider awsCredentialsProvider;
