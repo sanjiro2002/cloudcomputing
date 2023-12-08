@@ -27,14 +27,16 @@ public class DBConnection extends HttpServlet{
 		    BufferedWriter writer = new BufferedWriter(
 		      new OutputStreamWriter(resp.getOutputStream(), "UTF-8")
 		    );
-
+		    
+		 
 		    try {
-		      Connection connection = RDSConnection.getDBConnectionUsingIam();
+		      Connection connection = RDSConnectionRole.getDBConnectionUsingIamRole();
 		      //verify the connection is successful
 		        Statement stmt= connection.createStatement();
 		        ResultSet rs=stmt.executeQuery("SELECT 'Success!' FROM DUAL;");
 		        resp.setContentType("text/plain");
 			      resp.setStatus(200);
+			      StringBuilder report = new StringBuilder();
 		        while (rs.next()) {
 		        	
 		        	    String id = rs.getString(1);
@@ -42,22 +44,22 @@ public class DBConnection extends HttpServlet{
 		  		      writer.flush();
 		           
 		        }
-
-		     
+		        resp.setContentType("text/plain");
+	            resp.setStatus(200);
+	            writer.write(report.toString());
+	            writer.flush();	     
 		     
 		      writer.close();
 		    } catch (ClassNotFoundException | SQLException e) {
-		    	  resp.setContentType("text/plain");
-			      resp.setStatus(500);
-			      writer.write(e.toString());
-	  		      writer.flush();
+		    	writer.write(e.toString());
+	            writer.flush();
+	            writer.close();
 			      
 		    } catch (Exception e) {
 				// TODO Auto-generated catch block
-		    	 resp.setContentType("text/plain");
-			      resp.setStatus(500);
-			      writer.write(e.toString());
-	  		      writer.flush();
+		    	writer.write(e.toString());
+	            writer.flush();
+	            writer.close();
 			}
 		  }
 		}
